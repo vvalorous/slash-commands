@@ -17,7 +17,7 @@ for module in settings.INSTALLED_HANDLERS:
     importlib.import_module(module)
 
 # endpoint to dispatch event handler
-@app.route("/events", methods=["POST"])
+@app.route("/", methods=["POST"])
 def events():
 
     # parse payload
