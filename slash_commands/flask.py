@@ -21,13 +21,12 @@ for module in settings.INSTALLED_HANDLERS:
 def api():
 
     # parse data
-    token = request.form.get("token")
     command = request.form.get("command")
 
     # invoke handlers
-    commands = Command.get_commands()
-    for command in commands:
-        if command.command == command:
+    command_handlers = Command.get_commands()
+    for handler in command_handlers:
+        if handler.command == command:
             executor.delay(command, payload)
 
     # return 200 OK
