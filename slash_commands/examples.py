@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import os
+
 from slash_commands.command import Command
 
 
@@ -8,5 +10,5 @@ class Systemctl(Command):
     command = "/systemctl"
 
     def execute(self):
-        print(self.payload)
-        self.response.update({"text": "Akhil@123"})
+        date = os.sys("date")
+        self.response.update({"text": date})

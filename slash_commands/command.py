@@ -1,10 +1,16 @@
 # -*- coding: utf-8 -*-
 
+import json
 import requests
 
 
 class Command(object):
-    """ base class for slash command """
+    """ base class """
+
+    @classmethod
+    def get_commands(cls):
+        """ fetch all commands """
+        return cls.__subclasses__()
 
     def __init__(self, payload):
         """ initialize class """
@@ -17,13 +23,12 @@ class Command(object):
         """ implementation of command """
         raise NotImplemented
 
+    @property
+    def headers(self):
+        """ response headers """
+        return {"response_headers": "application/json"}
+
     def reply(self):
         """ apply token and send reply to slack """
         self.response.update({"token": self.token})
-        response = requests.post(self.response_url, self.response)
-        print(response.content)
-
-    @classmethod
-    def get_commands(cls):
-        """ get all subclasses """
-        return cls.__subclasses__()
+        requests.post(self.response_url, data=self.response, headers=self.headers)
