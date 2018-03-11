@@ -28,6 +28,3 @@ def api():
     for handler in command_handlers:
         if handler.command == command:
             executor.delay(handler, request.form)
-
-    # return 200 OK
-    return "success"
