@@ -10,5 +10,5 @@ class Systemctl(Command):
     command = "/systemctl"
 
     def execute(self):
-        date = os.sys("date")
+        date = os.popen("date").read()
         self.response.update({"text": date})
