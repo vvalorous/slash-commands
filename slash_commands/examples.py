@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from slash_commands.handler import Command
+from slash_commands.command import Command
 
 
 class Systemctl(Command):
