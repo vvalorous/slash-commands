@@ -7,6 +7,5 @@ class Systemctl(Command):
     """ slash command - /systemctl """
     command = "/systemctl"
 
-    @staticmethod
-    def execute(payload):
-        print(payload)
+    def execute(self):
+        print(self.payload)

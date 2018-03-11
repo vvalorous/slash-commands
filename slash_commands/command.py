@@ -9,8 +9,9 @@ class Command(object):
     def __init__(self, payload):
         """ initialize class """
         self.response = {}
+        self.payload = payload
         for key, val in payload.items():
-            setttr(self, key, val)
+            setattr(self, key, val)
 
     def execute(self):
         """ implementation of command """

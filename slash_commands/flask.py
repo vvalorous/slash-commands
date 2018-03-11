@@ -27,7 +27,7 @@ def api():
     command_handlers = Command.get_commands()
     for handler in command_handlers:
         if handler.command == command:
-            executor.delay(command, payload)
+            executor.delay(handler, request.form)
 
     # return 200 OK
     return "success"
