@@ -20,7 +20,8 @@ class Command(object):
     def reply(self):
         """ apply token and send reply to slack """
         self.response.update({"token": self.token})
-        requests.post(self.response_url, self.response)
+        response = requests.post(self.response_url, self.response)
+        print(response.content)
 
     @classmethod
     def get_commands(cls):
