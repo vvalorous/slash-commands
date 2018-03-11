@@ -30,4 +30,4 @@ def api():
             executor.delay(handler, request.form)
 
     # dummy response
-    return Response(status_code=200)
+    return Response(status=200)
