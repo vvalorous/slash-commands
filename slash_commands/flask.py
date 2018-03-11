@@ -3,7 +3,7 @@
 import pickle
 import importlib
 
-from flask import request, Flask
+from flask import request, Flask, Response
 
 from slash_commands.conf import settings
 from slash_commands.tasks import executor
@@ -28,3 +28,6 @@ def api():
     for handler in command_handlers:
         if handler.command == command:
             executor.delay(handler, request.form)
+
+    # dummy response
+    return Response(status_code=200)
