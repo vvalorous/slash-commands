@@ -7,7 +7,7 @@ from flask import request, Flask
 
 from slash_commands.conf import settings
 from slash_commands.tasks import executor
-from slash_commands.handler import EventHandler
+from slash_commands.command import Command
 
 # define flask app
 app = Flask(__name__)
@@ -18,19 +18,17 @@ for module in settings.INSTALLED_HANDLERS:
 
 # endpoint to dispatch event handler
 @app.route("/", methods=["POST"])
-def events():
+def api():
 
-    # parse payload
-    payload = request.get_json()
-    print(payload)
-    event = payload.get("type", "unknown").replace(".", "_")
+    # parse data
+    token = request.form.get("token")
+    command = request.form.get("command")
 
     # invoke handlers
-    handlers = EventHandler.get_handlers()
-    for handler in handlers:
-        event_handler = getattr(handler, event)
-        if event_handler:
-            executor.delay(event_handler, payload)
+    commands = Command.get_commands()
+    for command in commands:
+        if command.command == command:
+            executor.delay(command, payload)
 
     # return 200 OK
     return "success"

@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from slash_commands.handler import EventHandler
+from slash_commands.handler import Command
 
 
-class MessageHandler(EventHandler):
+class Systemctl(Command):
+    """ slash command - /systemctl """
+    command = "/systemctl"
 
     @staticmethod
-    def message(payload):
+    def execute(payload):
         print(payload)

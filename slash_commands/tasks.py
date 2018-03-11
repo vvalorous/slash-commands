@@ -4,6 +4,8 @@ import pickle
 from slash_commands.celery import app
 
 @app.task
-def executor(func, *args, **kwargs):
+def executor(command, *args, **kwargs):
     """ celery task to execute handler functions asynchronously """
-    func(*args, **kwargs)
+    command = command(*args, **kwargs)
+    command.execute()
+    command.reply()
