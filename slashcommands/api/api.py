@@ -57,7 +57,7 @@ def get_handler(command):
 @app.route("/slash-commands", methods=['POST'])
 def dispatcher():
     """ This method dispatches request to respective handlers """
-    payload = request.get_json()
+    payload = request.form
     handler = get_handler(payload['command'])
     handler.execute.delay()
 
