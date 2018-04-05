@@ -48,10 +48,10 @@ def get_handler(command):
     Returns:
         object
     """
-    commands = get_all_subclasses(SlashCommand)
-    for command in commands:
-        if command.command == payload['command']:
-            return command(payload)
+    slashcommands = get_all_subclasses(SlashCommand)
+    for slashcommand in slashcommands:
+        if slashcommand.command == command:
+            return slashcommand(payload)
 
 
 @app.route("/slash-commands", methods=['POST'])

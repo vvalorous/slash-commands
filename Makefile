@@ -7,6 +7,6 @@ install:
 	pipenv install
 
 run:
-	env PYTHONPATH=$(PWD) pipenv run python ./slashcommands/api/api.py
+	env PYTHONPATH=$(PWD) pipenv run python ./slashcommands/flask/api.py
 
 all: clean install run
