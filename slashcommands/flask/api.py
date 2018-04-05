@@ -38,27 +38,26 @@ def get_all_subclasses(cls):
     return all_subclasses
 
 
-def get_handler(command):
+def get_handler(payload):
     """
     This method identifies the class associated with the command
 
     Args:
-        command (str) -- command whose handler/definition needs to be identified
+        payload (dict) -- command whose handler/definition needs to be identified
 
     Returns:
         object
     """
     slashcommands = get_all_subclasses(SlashCommand)
     for slashcommand in slashcommands:
-        if slashcommand.command == command:
+        if slashcommand.command == payload['command']:
             return slashcommand(payload)
 
 
 @app.route("/slash-commands", methods=['POST'])
 def dispatcher():
     """ This method dispatches request to respective handlers """
-    payload = request.form
-    handler = get_handler(payload['command'])
+    handler = get_handler(request.form)
     handler.execute.delay()
 
 
