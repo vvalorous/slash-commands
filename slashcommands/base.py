@@ -1,13 +1,11 @@
 # coding=utf-8
 
-import abc
-
 import requests
 
 from .celery import app
 
 
-class SlashCommand(abc.ABC):
+class SlashCommand(object):
     """ This class represent the structure or layout of a command """
 
     def __init__(self, payload):
@@ -20,22 +18,18 @@ class SlashCommand(abc.ABC):
         self.payload = payload
 
     @property
-    @abc.abstractmethod
     def command(self):
         """ pattern used to invoke the command """
-        raise NotImplementedError
+        raise NotImplementedError()
 
-    @abc.abstractmethod
     def pre_execution_hook(self):
         """ This method is invoked before calling the handler of the command """
         pass
 
-    @abc.abstractmethod
     def handler(self):
         """ logic or intelligence of the command """
         pass
 
-    @abc.abstractmethod
     def post_execution_hook(self):
         """ This method is invoked after calling the handler of the command """
         pass
