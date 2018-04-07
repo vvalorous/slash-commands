@@ -40,7 +40,8 @@ class SlashCommand(object):
             content (dict) -- dictionary containing the response
         """
         endpoint = self.payload['response_url']
-        requests.post(endpoint, reponse)
+        ack = requests.post(endpoint, data=reponse)
+        ack.raise_for_status()
 
     def execute(self):
         """ This method executed the command along with the pre and post hooks """

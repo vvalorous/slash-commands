@@ -1,5 +1,6 @@
 # coding=utf-8
 
+import json
 from importlib import import_module
 
 from flask import Flask, request
@@ -55,12 +56,13 @@ def get_handler(payload):
             return slashcommand(payload)
 
 
-@app.route("/slash-commands", methods=['POST'])
+@app.route('/slash-commands', methods=['POST'])
 def dispatcher():
     """ This method dispatches request to respective handlers """
     handler = get_handler(request.form)
     process_request.delay(handler)
-    return ('', 200)
+    ack = json.dumps({'response_type': 'in_channel'})
+    return (ack, 200)
 
 
 if __name__ == '__main__':
