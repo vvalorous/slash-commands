@@ -2,4 +2,5 @@
 
 INSTALLED_COMMANDS = (
     'slashcommands.psutil',
+    'slashcommands.systemctl',
 )
