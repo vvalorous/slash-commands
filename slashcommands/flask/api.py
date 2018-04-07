@@ -5,6 +5,7 @@ from importlib import import_module
 from flask import Flask, request
 
 from slashcommands.base import SlashCommand
+from slashcommands.celery import process_request
 
 app = Flask(__name__)
 app.config.from_object('settings')
@@ -58,7 +59,7 @@ def get_handler(payload):
 def dispatcher():
     """ This method dispatches request to respective handlers """
     handler = get_handler(request.form)
-    handler.execute.delay()
+    process_request.delay(handler)
 
 
 if __name__ == '__main__':

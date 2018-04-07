@@ -2,8 +2,6 @@
 
 import requests
 
-from .celery import app
-
 
 class SlashCommand(object):
     """ This class represent the structure or layout of a command """
@@ -34,7 +32,7 @@ class SlashCommand(object):
         """ This method is invoked after calling the handler of the command """
         pass
 
-    def send_response(self, content):
+    def send_response(self, reponse):
         """
         This method send response back to the slack
 
@@ -42,9 +40,8 @@ class SlashCommand(object):
             content (dict) -- dictionary containing the response
         """
         endpoint = self.payload['request_url']
-        requests.post(endpoint, content)
+        requests.post(endpoint, reponse)
 
-    @app.task
     def execute(self):
         """ This method executed the command along with the pre and post hooks """
         self.pre_execution_hook()
