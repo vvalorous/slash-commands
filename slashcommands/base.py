@@ -32,15 +32,15 @@ class SlashCommand(object):
         """ This method is invoked after calling the handler of the command """
         pass
 
-    def send_response(self, reponse):
+    def send_response(self, response):
         """
         This method send response back to the slack
 
         Args:
-            content (dict) -- dictionary containing the response
+            response (dict) -- dictionary containing the response
         """
         endpoint = self.payload['response_url']
-        ack = requests.post(endpoint, data=reponse)
+        ack = requests.post(endpoint, json=response)
         ack.raise_for_status()
 
     def execute(self):
