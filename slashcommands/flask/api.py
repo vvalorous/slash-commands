@@ -60,6 +60,7 @@ def dispatcher():
     """ This method dispatches request to respective handlers """
     handler = get_handler(request.form)
     process_request.delay(handler)
+    return ('', 200)
 
 
 if __name__ == '__main__':

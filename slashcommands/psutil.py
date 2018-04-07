@@ -11,4 +11,4 @@ class PSUtil(SlashCommand):
 
     def handler(self):
         """ This method defines what needs to be done when this command is invoked  """
-        pass
+        return {'text': 'Hello World'}

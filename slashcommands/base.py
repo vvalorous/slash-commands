@@ -39,7 +39,7 @@ class SlashCommand(object):
         Args:
             content (dict) -- dictionary containing the response
         """
-        endpoint = self.payload['request_url']
+        endpoint = self.payload['response_url']
         requests.post(endpoint, reponse)
 
     def execute(self):
