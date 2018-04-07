@@ -39,6 +39,7 @@ class SlashCommand(object):
         Args:
             response (dict) -- dictionary containing the response
         """
+        response.update({'response_type': 'in_channel'})
         endpoint = self.payload['response_url']
         ack = requests.post(endpoint, json=response)
         ack.raise_for_status()
