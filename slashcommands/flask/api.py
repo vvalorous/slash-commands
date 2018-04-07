@@ -3,7 +3,7 @@
 import json
 from importlib import import_module
 
-from flask import Flask, request
+from flask import Flask, request, jsonify
 
 from slashcommands.base import SlashCommand
 from slashcommands.celery import process_request
@@ -61,8 +61,7 @@ def dispatcher():
     """ This method dispatches request to respective handlers """
     handler = get_handler(request.form)
     process_request.delay(handler)
-    ack = json.dumps({'response_type': 'in_channel'})
-    return (ack, 200)
+    return jsonify({'response_type': 'in_channel'})
 
 
 if __name__ == '__main__':
