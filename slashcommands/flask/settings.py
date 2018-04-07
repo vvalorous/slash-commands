@@ -1,6 +1,6 @@
 # coding=utf-8
 
 INSTALLED_COMMANDS = (
-    'slashcommands.psutil',
-    'slashcommands.systemctl',
+    'slashcommands.contrib.psutil',
+    'slashcommands.contrib.systemctl',
 )
